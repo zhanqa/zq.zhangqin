@@ -9,9 +9,9 @@ def server():
 	listenSocket = socket(AF_INET,SOCK_STREAM)
 	listenSocket.bind((IP,PORT))
 	listenSocket.listen(8)
-	print(f'           ɹ     {PORT} ˿ڵȴ  ͻ       ...')
+	print(f'客户端启动成功，在{port}端口等待客户端连接...')
 	dataSocket,addr =listenSocket.accept()
-	print('    һ   ͻ       :',addr)
+	print('接收一个客户端',addr)
 	while True:
 		receved = dataSocket.recv(BUFLEN)
 
@@ -19,9 +19,9 @@ def server():
 			break
 
 		info = receved.decode()
-		print(f' յ  Է     Ϣ  {info}')
+		print(f'收到对方信息：{info}')
 
-		dataSocket.send(f'    ˽  յ     Ϣ:{info}'.encode())
+		dataSocket.send(f'服务端收到信息:{info[::-1]}'.encode())
 
 	dataSocket.close()
 	listenSocket.close()
